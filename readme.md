@@ -6,6 +6,8 @@ Docker compose file elastic-apm-compose.yml found here : https://gist.github.com
 
 ```bash 
 TAG=7.14.1 docker-compose -f elastic-apm-compose.yml up -d
+
+TAG=6.8.16 docker-compose -f elastic-apm-compose-oss.yml  up -d
 ```
 
 ## After the stack is full running please go to

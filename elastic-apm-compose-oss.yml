@@ -1,0 +1,38 @@
+---
+version: '3.1'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${TAG}
+    environment: ['ES_JAVA_OPTS=-Xms2g -Xmx2g','bootstrap.memory_lock=true','discovery.type=single-node', 'http.host=0.0.0.0', 'transport.host=127.0.0.1' ,'TZ=Asia/Taipei']
+    ports: 
+    - "9200:9200"
+    networks: ['stack']
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana-oss:${TAG}
+    environment: ['ELASTICSEARCH_URL=http://elasticsearch:9200','TZ=Asia/Taipei']
+    ports: 
+    - "5601:5601"
+    networks: ['stack']
+    depends_on: ['elasticsearch']
+##https://partners-intl.aliyun.com/help/doc-detail/210065.htm
+##https://github.com/elastic/helm-charts/blob/7.10/apm-server/examples/oss/values.yaml
+  apm-server:
+    container_name: apm
+    image: docker.elastic.co/apm/apm-server-oss:${TAG}
+    environment: [ 'output.file.enabled=false','output.elasticsearch.hosts=elasticsearch:9200','output.elasticsearch.max_retries=1','apm-server.kibana.enabled=true','apm-server.host=0.0.0.0:8200','apm-server.ssl.enabled=flase','ELASTICSEARCH_HOST=elasticsearch','ELASTICSEARCH_PORT=9200','KIBANA_HOST=kibana','KIBANA_PORT=5601','TZ=Asia/Taipei','apm-server.rum.enabled=true' ,'apm-server.rum.event_rate.limit=1000']
+    ports:
+    - "8200:8200"
+    - "6060:6060"
+    networks: ['stack']
+    depends_on: ['elasticsearch']    
+networks: {stack: {}}

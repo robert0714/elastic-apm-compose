@@ -5,9 +5,9 @@ THIS IS NOT A PRODUCTION SETUP
 Docker compose file elastic-apm-compose.yml found here : https://gist.github.com/bvader/9665fa7b3bd69457517e41a7c28b4725
 
 ```bash 
-TAG=7.14.1 docker-compose -f elastic-apm-compose.yml up -d
+TAG=7.16.3 docker-compose -f elastic-apm-compose.yml up -d
 
-TAG=6.8.16 docker-compose -f elastic-apm-compose-oss.yml  up -d
+TAG=6.8.23 docker-compose -f elastic-apm-compose-oss.yml  up -d
 ```
 
 ## After the stack is full running please go to
@@ -31,9 +31,9 @@ cd spring-petclinic
 ./mvnw package -Dmaven.test.skip=true
 
 # Get the Elastic Java APM agent
-curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.26.0/elastic-apm-agent-1.26.0.jar
+curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.28.3/elastic-apm-agent-1.28.3.jar
 
-curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/apm-agent-attach-cli/1.26.0/apm-agent-attach-cli-1.26.0.jar
+curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/apm-agent-attach-cli/1.28.3/apm-agent-attach-cli-1.28.3.jar
 
 
 # Run Petclinc with APM, 
@@ -41,7 +41,7 @@ NOTE: this enables method tracing
 
 ## Unix / Mac OS
 ```bash
-java -javaagent:/home/vagrant/elastic-apm-agent-1.12.0.jar \
+java -javaagent:/home/vagrant/elastic-apm-agent-1.28.3.jar \
 -Delastic.apm.server_urls="http://10.100.98.200:8200" \
 -Delastic.apm.service_name="spring-petclinic-monolith" \
 -Delastic.apm.application_packages="org.springframework.samples" \
@@ -49,7 +49,7 @@ java -javaagent:/home/vagrant/elastic-apm-agent-1.12.0.jar \
 -jar  spring-petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar
 ```
 
-java -jar  apm-agent-attach-cli-1.26.0.jar \
+java -jar  apm-agent-attach-cli-1.28.3.jar \
     --exclude-user root \
     --include-main MyApplication spring-petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar \
     --include-vmargs elastic.apm.agent.attach=true \
@@ -59,7 +59,7 @@ java -jar  apm-agent-attach-cli-1.26.0.jar \
 
 ## Windows
 ```bash
-java -javaagent:./elastic-apm-agent-1.26.0.jar `
+java -javaagent:./elastic-apm-agent-1.28.3.jar `
 "-Delastic.apm.server_urls=http://localhost:8200" `
 "-Delastic.apm.service_name=spring-petclinic-monolith" `
 "-Delastic.apm.application_packages=org.springframework.samples" `

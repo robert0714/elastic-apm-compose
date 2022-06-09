@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kibana
   labels:
-    app: kibana  
+    app: kibana 
 spec:
   selector:
     matchLabels:
@@ -14,24 +14,22 @@ spec:
         run: kibana
     spec:
       containers:
-      - name: kibana
-        image: docker.elastic.co/kibana/kibana:7.14.1
-        env:
-        - name: ELASTICSEARCH_URL
-          value: http://elasticsearch.pdc-apm.svc.cluster.local:9200
-        - name: TZ
-          value: Asia/Taipei
-        ports:
-        - containerPort: 5601
-          name: http
-          protocol: TCP
-
+        - name: kibana
+          image: docker.elastic.co/kibana/kibana:7.14.1
+          env:
+           - name: ELASTICSEARCH_URL
+             value: http://elasticsearch.robert0714-lee-stage.svc.cluster.local:9200
+           - name: TZ
+             value: Asia/Taipei
+          ports:
+           - containerPort: 5601
+             name: http
+             protocol: TCP
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  app: kibana
   name: kibana
   labels:
     service: kibana
@@ -42,4 +40,3 @@ spec:
   ports:
   - port: 5601
     targetPort: 5601
-

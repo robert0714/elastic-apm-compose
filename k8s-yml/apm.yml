@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name:  apm
-        image: docker.elastic.co/apm/apm-server:7.14.1
+        image: docker.elastic.co/apm/apm-server:7.17.10
         env:
         - name: apm-server.rum.enabled
           value: 'true'
@@ -24,11 +24,11 @@ spec:
         - name: apm-server.rum.event_rate.limit
           value: '1000'
         - name: ELASTICSEARCH_HOST
-          value: elasticsearch.robert0714-lee-stage.svc.cluster.local
+          value: elasticsearch.default.svc.cluster.local
         - name: ELASTICSEARCH_PORT
           value: "9200"        
         - name: KIBANA_HOST
-          value: kibana.robert0714-lee-stage.svc.cluster.local
+          value: kibana.default.svc.cluster.local
         - name: KIBANA_PORT
           value: "5601"
         ports:

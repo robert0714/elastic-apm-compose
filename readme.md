@@ -85,3 +85,50 @@ TAG=7.17.14 docker-compose -f elastic-apm-compose.yml down
 
 TAG=7.17.14 docker-compose -f elastic-apm-compose.yml start
 TAG=7.17.14 docker-compose -f elastic-apm-compose.yml stop
+# IF You need prefic apm
+```yaml
+version: '3.1'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17
+    environment: ['ES_JAVA_OPTS=-Xms2g -Xmx2g','bootstrap.memory_lock=true','discovery.type=single-node', 'http.host=0.0.0.0', 'transport.host=127.0.0.1']
+    restart: always
+    ports:
+    - "9200:9200"
+    networks: ['stack']
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.17
+    ports:
+    - "5601:5601"
+    environment: ['SERVER_BASEPATH=/apm','SERVER_REWRITEBASEPATH=true']
+    restart: always
+    networks: ['stack']
+    depends_on: ['elasticsearch']
+
+  apm-server:
+    container_name: apm
+    restart: always
+    image: docker.elastic.co/apm/apm-server:7.17
+    ports:
+    - "8200:8200"
+    - "6060:6060"
+    networks: ['stack']
+    depends_on: ['elasticsearch']
+    command: >
+      apm-server -e
+        -E apm-server.rum.enabled=true
+        -E apm-server.kibana.path=/apm
+        -E apm-server.rum.event_rate.limit=1000
+networks: {stack: {}}
+
+```

@@ -5,7 +5,7 @@ THIS IS NOT A PRODUCTION SETUP
 Docker compose file elastic-apm-compose.yml found here : https://gist.github.com/bvader/9665fa7b3bd69457517e41a7c28b4725
 
 ```bash 
-TAG=7.17.10 docker-compose -f elastic-apm-compose.yml up -d
+TAG=7.17.14 docker-compose -f elastic-apm-compose.yml up -d
 
 TAG=7.10.2 docker-compose -f elastic-apm-compose-oss.yml  up -d
 ```
@@ -80,8 +80,8 @@ java -javaagent:./elastic-apm-agent-1.28.4.jar `
 # Then point your own apps if you want
 
 # User docker compose to stand up whole stack Elasticsearch, Kibana and APM server
-TAG=7.17.4 docker-compose -f elastic-apm-compose.yml up
-TAG=7.17.4 docker-compose -f elastic-apm-compose.yml down
+TAG=7.17.14 docker-compose -f elastic-apm-compose.yml up
+TAG=7.17.14 docker-compose -f elastic-apm-compose.yml down
 
-TAG=7.17.4 docker-compose -f elastic-apm-compose.yml start
-TAG=7.17.4 docker-compose -f elastic-apm-compose.yml stop
+TAG=7.17.14 docker-compose -f elastic-apm-compose.yml start
+TAG=7.17.14 docker-compose -f elastic-apm-compose.yml stop

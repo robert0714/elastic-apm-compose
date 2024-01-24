@@ -131,6 +131,9 @@ services:
         -E apm-server.rum.event_rate.limit=1000
 networks: {stack: {}}
 ```
-# Official Document
+# Official Documentation
 * https://www.elastic.co/guide/en/observability/current/apm.html
-* 
+> Problem : there is differences between configuration of docker-compose on ES version 7 (and below) with ES version 8 (and above). In ES 8, it is mandatory to include xpack.security to enable APM-Elastic-Kibana stack.  
+>  * [Elaticsearch 8.12 docker configuration](https://www.elastic.co/guide/en/elasticsearch/reference/8.12/docker.html)
+>  * [Elaticsearch 7.17 docker configuration](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/docker.html)
+> PS. https://adhon-rizky.medium.com/enable-apm-on-clustered-elasticsearch-stack-8-6-x-5201d48e3fa1

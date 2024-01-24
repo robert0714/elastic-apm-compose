@@ -130,5 +130,7 @@ services:
         -E apm-server.kibana.path=/apm
         -E apm-server.rum.event_rate.limit=1000
 networks: {stack: {}}
-
 ```
+# Official Document
+* https://www.elastic.co/guide/en/observability/current/apm.html
+* 

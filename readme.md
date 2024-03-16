@@ -5,7 +5,7 @@ THIS IS NOT A PRODUCTION SETUP
 Docker compose file elastic-apm-compose.yml found here : https://gist.github.com/bvader/9665fa7b3bd69457517e41a7c28b4725
 
 ```bash 
-TAG=7.17.14 docker-compose -f elastic-apm-compose.yml up -d
+TAG=7.17.18 docker-compose -f elastic-apm-compose.yml up -d
 
 TAG=7.10.2 docker-compose -f elastic-apm-compose-oss.yml  up -d
 ```

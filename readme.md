@@ -5,7 +5,7 @@ THIS IS NOT A PRODUCTION SETUP
 Docker compose file elastic-apm-compose.yml found here : https://gist.github.com/bvader/9665fa7b3bd69457517e41a7c28b4725
 
 ```bash 
-TAG=7.17.21 docker-compose -f elastic-apm-compose.yml up -d
+TAG=7.17.26 docker-compose -f elastic-apm-compose.yml up -d
 
 TAG=7.10.2 docker-compose -f elastic-apm-compose-oss.yml  up -d
 ```
@@ -31,7 +31,7 @@ cd spring-petclinic
 ./mvnw package -Dmaven.test.skip=true
 
 # Get the Elastic Java APM agent
-curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.28.4/elastic-apm-agent-1.28.4.jar
+curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/elastic-apm-agent/1.52.1/elastic-apm-agent-1.52.1.jar
 
 curl -O  https://search.maven.org/remotecontent?filepath=co/elastic/apm/apm-agent-attach-cli/1.28.4/apm-agent-attach-cli-1.28.4.jar
 
@@ -41,7 +41,7 @@ NOTE: this enables method tracing
 
 ## Unix / Mac OS
 ```bash
-java -javaagent:/home/vagrant/elastic-apm-agent-1.28.4.jar \
+java -javaagent:/home/vagrant/elastic-apm-agent-1.52.1.jar \
 -Delastic.apm.server_urls="http://10.100.98.200:8200" \
 -Delastic.apm.service_name="spring-petclinic-monolith" \
 -Delastic.apm.application_packages="org.springframework.samples" \
@@ -59,7 +59,7 @@ java -jar  apm-agent-attach-cli-1.28.4.jar \
 
 ## Windows
 ```bash
-java -javaagent:./elastic-apm-agent-1.28.4.jar `
+java -javaagent:./elastic-apm-agent-1.52.1.jar `
 "-Delastic.apm.server_urls=http://localhost:8200" `
 "-Delastic.apm.service_name=spring-petclinic-monolith" `
 "-Delastic.apm.application_packages=org.springframework.samples" `

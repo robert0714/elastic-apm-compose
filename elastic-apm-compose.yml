@@ -8,6 +8,7 @@ services:
     ports: 
     - "9200:9200"
     networks: ['stack']
+    restart: unless-stopped
     ulimits:
       memlock:
         soft: -1
@@ -26,6 +27,7 @@ services:
     - SERVER_BASEPATH=/apm
     - SERVER_REWRITEBASEPATH=true    
     networks: ['stack']
+    restart: unless-stopped
     depends_on: ['elasticsearch']
 
   apm-server:
@@ -35,6 +37,7 @@ services:
     - "8200:8200"
     - "6060:6060"
     networks: ['stack']
+    restart: unless-stopped
     environment: ['TZ=Asia/Taipei']
     depends_on: ['elasticsearch']
     command: >
